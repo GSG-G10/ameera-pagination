@@ -5,11 +5,11 @@ import {Pagination} from 'antd';
 
 function App () {
   const [data, setData] = useState ([]);
-  const [pageNumber, setPageNumber] = useState (1);
+  const [pageNumber, setPageNumber] = useState ();
 
   useEffect (
     () => {
-      //const abortController = new AbortController();
+    
       function fetchApi () {
         fetch (
           `https://api.unsplash.com/search/collections?page=${pageNumber}&limit=10&query=cat&client_id=kQ_rA8Dd9Tb-JZ80Nx6RyFBtaoIFyaP5kdLn5EmGkVM`
@@ -20,15 +20,13 @@ function App () {
       }
       fetchApi();
       console.log (data);
-      // return () => {
-      //   abortController.abort()
-      // }
+    
     },
     [pageNumber]
   );
 
-  const handelChange = event => {
-    setPageNumber(event.target.value);
+  const handelChange = (value) => {
+    setPageNumber(value);
   };
 
   return (
@@ -36,7 +34,7 @@ function App () {
       <div className="photo" />
       <div className="pagination">
 {console.log(pageNumber)}
-        <Pagination defaultCurrent={1} total={50} onChnage={handelChange} />
+        <Pagination defaultCurrent={1} total={50} onChange={handelChange} />
       </div>
     </div>
   );
