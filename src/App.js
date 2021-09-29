@@ -6,6 +6,7 @@ import {Pagination} from 'antd';
 function App () {
   const [data, setData] = useState ([]);
   const [pageNumber, setPageNumber] = useState ();
+  const [loading,setLoding]=useState(true);
 
   useEffect (
     () => {
@@ -15,7 +16,7 @@ function App () {
           `https://api.unsplash.com/search/collections?page=${pageNumber}&limit=10&query=cat&client_id=kQ_rA8Dd9Tb-JZ80Nx6RyFBtaoIFyaP5kdLn5EmGkVM`
         )
           .then (res => res.json ())
-          .then (result => setData (result.results))
+          .then (result => setData (result.results)).then(data=>setLoding(false))
           .catch (err => console.log ('erro'));
       }
       fetchApi();
@@ -32,7 +33,8 @@ function App () {
   return (
     <div className="pagination-cont">
       <div className="photo" >
-      <img src={data[0].preview_photos[0].urls.full} alt="img" className="img"/>
+      {loading ? <h1>laoding ...</h1>:<img src={data[0].preview_photos[0].urls.full} alt="img" className="img"/>}
+     
       </div>
       <div className="pagination">
 {console.log(pageNumber)}
