@@ -31,7 +31,9 @@ function App () {
 
   return (
     <div className="pagination-cont">
-      <div className="photo" />
+      <div className="photo" >
+      <img src={data[0].preview_photos[0].urls.full} alt="img" className="img"/>
+      </div>
       <div className="pagination">
 {console.log(pageNumber)}
         <Pagination defaultCurrent={1} total={50} onChange={handelChange} />
